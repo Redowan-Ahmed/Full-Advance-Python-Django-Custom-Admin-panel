@@ -51,7 +51,7 @@ class ShopProduct(BaseModel):
 class ProductVariation(BaseModel):
     variation_type = models.CharField(max_length=100)
     product = models.ForeignKey(
-        ShopProduct, on_delete=models.CASCADE, related_name='product')
+        ShopProduct, on_delete=models.CASCADE, related_name='variant_products')
     variation_name = models.CharField(max_length=250)
     short_description = models.TextField(
         max_length=1200, default='0', blank=True)
@@ -70,7 +70,7 @@ class ProductVariation(BaseModel):
 
 class ProductImageGallery(BaseModel):
     product = models.ForeignKey(
-        ShopProduct, on_delete=models.CASCADE, related_name='product_image_gallery')
+        ShopProduct, on_delete=models.CASCADE, related_name='product_images')
     image = models.ImageField(upload_to='product-image-gallery')
 
     def __str__(self):
@@ -79,7 +79,7 @@ class ProductImageGallery(BaseModel):
 
 class ProductVariationsImageGallery(BaseModel):
     variant_product = models.ForeignKey(
-        ProductVariation, on_delete=models.CASCADE, related_name='variant_product_image_gallery')
+        ProductVariation, on_delete=models.CASCADE, related_name='variant_product_images')
     image = models.ImageField(upload_to='product-image-gallery')
 
     def __str__(self):
