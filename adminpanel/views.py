@@ -8,6 +8,6 @@ from .serializers import ShopProductSerializer, ProductVariationsImageGallerySer
 def index(request):
     return HttpResponseRedirect('/api/')
 
-class ProductViewset(viewsets.ModelViewSet):
+class ProductsViewset(viewsets.ModelViewSet):
     queryset = ShopProduct.objects.all()
     serializer_class = ShopProductSerializer

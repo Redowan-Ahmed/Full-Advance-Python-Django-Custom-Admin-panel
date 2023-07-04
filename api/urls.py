@@ -6,7 +6,7 @@ from adminpanel import views
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
-router.register(r'products', views.ProductViewset)
+router.register(r'products', views.ProductsViewset)
 
 
 urlpatterns = [
