@@ -9,7 +9,7 @@ class ShopProductAdmin(admin.ModelAdmin):
     # product list page  customize
 
     list_display = ('Thumbnail', 'product_name', 'regular_price',
-                    'discounted_price', 'schedule_discount', 'created_at', 'updated_at')
+                    'discounted_price', 'stock','out_of_stock', 'created_at', 'updated_at')
     # By this  you can show or hide django admin panel list display objects . By this you can also define any function and mathematical terms and show in the list
     actions_on_bottom = True
     # By this True value here django admin panel will show action form at the Bottom. if the value is False the action form will be not displayed at bottom.
@@ -19,17 +19,17 @@ class ShopProductAdmin(admin.ModelAdmin):
     # By this True value here django admin panel will show action form at the top. if the value is False the action form will be not displayed at top.
     list_per_page = 10
     # By adding any numeric value here depending on the value the admin panel will show products or objects in a page and rest of them will show in the next page and at the bottom it will show a pagination .
-    list_editable = ['regular_price', 'discounted_price', 'schedule_discount']
+    list_editable = ['regular_price', 'discounted_price','out_of_stock','stock']
     # this helps to change value in the object list page instead of going to edit page to make small changes, Also by this method you can also edit multiple object single data and save. But The value of 'product_name' cannot be in both 'list_editable' and 'list_display_links'.
     list_filter = ['regular_price',
-                   'discounted_price', 'created_at', 'updated_at']
+                   'discounted_price','out_of_stock','stock', 'created_at', 'updated_at']
 
     search_fields = ['product_name']
 
     # product Edit page Customize
 
-    fields = ['product_name', 'short_description', 'description', 'sku', 'regular_price',
-              'discounted_price', 'schedule_discount', 'author', 'thumbnail', 'thumbnail_preview']
+    fields = ['product_name', 'short_description', 'description', 'sku','slug', 'regular_price',
+              'discounted_price', 'schedule_discount','stock','out_of_stock' ,'author', 'thumbnail', 'thumbnail_preview']
     # this helps to add a custom serial way form show and remove or add any extra fields in the editing page
     exclude = ['']
     # this helps to exclude or remove any field from the editing page.
@@ -87,7 +87,7 @@ class ProductVariationAdmin(admin.ModelAdmin):
     # product list page  customize
 
     list_display = ('Thumbnail','product' ,'variation_type', 'variation_name', 'regular_price',
-                    'discounted_price', 'schedule_discount', 'created_at', 'updated_at')
+                    'discounted_price', 'out_of_stock','stock' , 'created_at', 'updated_at')
     # By this  you can show or hide django admin panel list display objects . By this you can also define any function and mathematical terms and show in the list
     actions_on_bottom = True
     # By this True value here django admin panel will show action form at the Bottom. if the value is False the action form will be not displayed at bottom.
@@ -97,16 +97,16 @@ class ProductVariationAdmin(admin.ModelAdmin):
     # By this True value here django admin panel will show action form at the top. if the value is False the action form will be not displayed at top.
     list_per_page = 10
     # By adding any numeric value here depending on the value the admin panel will show products or objects in a page and rest of them will show in the next page and at the bottom it will show a pagination .
-    list_editable = ['regular_price', 'discounted_price', 'schedule_discount', 'variation_type', 'variation_name']
+    list_editable = ['regular_price', 'discounted_price', 'out_of_stock','stock', 'variation_type', 'variation_name']
     # this helps to change value in the object list page instead of going to edit page to make small changes, Also by this method you can also edit multiple object single data and save. But The value of 'product_name' cannot be in both 'list_editable' and 'list_display_links'.
     list_filter = ['regular_price',
-                   'discounted_price', 'created_at', 'updated_at', 'variation_name', 'variation_type']
+                   'discounted_price', 'out_of_stock','stock', 'created_at', 'updated_at', 'variation_name', 'variation_type']
 
     search_fields = ['variation_name', 'variation_type']
 
     # product Edit page Customize
 
-    fields = ['product', 'variation_type','variation_name', 'short_description','sku','regular_price', 'discounted_price', 'schedule_discount','thumbnail_preview']
+    fields = ['product', 'variation_type','variation_name', 'short_description','sku','out_of_stock','stock','regular_price', 'discounted_price', 'schedule_discount','thumbnail_preview']
     # this helps to add a custom serial way form show and remove or add any extra fields in the editing page
     exclude = ['']
     # this helps to exclude or remove any field from the editing page.F
