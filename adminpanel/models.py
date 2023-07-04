@@ -22,7 +22,7 @@ class ShopProduct(BaseModel):
     description = models.TextField(max_length=5000)
     thumbnail = models.ImageField(upload_to='product-images')
     sku = models.CharField(max_length=200, blank=True, null=True, unique=True)
-    slug = models.SlugField(max_length=350, blank=True, default=uuid.uuid4, unique=True)
+    slug = models.SlugField(max_length=350, blank=True, unique=True)
     regular_price = models.DecimalField(max_digits=1000, decimal_places=2)
     discounted_price = models.DecimalField(
         max_digits=1000, decimal_places=2, blank=True, null=True)
