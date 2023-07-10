@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'adminpanel',
     'rest_framework',
+    'aliscrape',
 ]
 
 MIDDLEWARE = [

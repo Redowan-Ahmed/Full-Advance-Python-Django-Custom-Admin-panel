@@ -47,11 +47,13 @@ class ShopProductAdmin(admin.ModelAdmin):
     # this helps to define any files as readonly, which is not editable
 
     def Thumbnail(self, obj):
-        return format_html(f'<img src="{obj.thumbnail.url}" width="50px" height="50px" />')
+        if obj.thumbnail:
+            return format_html(f'<img src="{obj.thumbnail.url}" width="50px" height="50px" />')
+        return format_html(f'<img src="No Image" width="50px" height="50px" />')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
-        return format_html(f'<img width="120px" src="{obj.thumbnail.url}" >')
+        return format_html(f'<img width="120px" src="{obj.thumbnail.url}" alt="No Image" >')
     # to show Preview the thumbnail image in the edit page
 
 

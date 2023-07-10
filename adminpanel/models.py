@@ -20,7 +20,7 @@ class ShopProduct(BaseModel):
     short_description = models.TextField(
         max_length=1200, default='0', blank=True)
     description = models.TextField(max_length=5000)
-    thumbnail = models.ImageField(upload_to='product-images')
+    thumbnail = models.ImageField(upload_to='product-images', blank=True, null=True)
     sku = models.CharField(max_length=200, blank=True, null=True, unique=True)
     slug = models.SlugField(max_length=350, blank=True, unique=True)
     regular_price = models.DecimalField(max_digits=1000, decimal_places=2)
@@ -51,12 +51,12 @@ class ShopProduct(BaseModel):
 class ProductVariation(BaseModel):
     variation_type = models.CharField(max_length=100)
     product = models.ForeignKey(
-        ShopProduct, on_delete=models.CASCADE, related_name='variant_products')
+        ShopProduct, on_delete=models.CASCADE, related_name='variant_products', blank=True)
     variation_name = models.CharField(max_length=250)
     short_description = models.TextField(
         max_length=1200, default='0', blank=True)
     sku = models.CharField(max_length=200, blank=True, null=True, unique=True)
-    thumbnail = models.ImageField(upload_to='product-images')
+    thumbnail = models.ImageField(upload_to='product-images', blank=True, null=True)
     regular_price = models.DecimalField(max_digits=1000, decimal_places=2)
     discounted_price = models.DecimalField(
         max_digits=1000, decimal_places=2, blank=True, null=True)
@@ -71,7 +71,7 @@ class ProductVariation(BaseModel):
 class ProductImageGallery(BaseModel):
     product = models.ForeignKey(
         ShopProduct, on_delete=models.CASCADE, related_name='product_images')
-    image = models.ImageField(upload_to='product-image-gallery')
+    image = models.ImageField(upload_to='product-image-gallery', blank=True, null=True)
 
     def __str__(self):
         return self.product.product_name
@@ -80,7 +80,7 @@ class ProductImageGallery(BaseModel):
 class ProductVariationsImageGallery(BaseModel):
     variant_product = models.ForeignKey(
         ProductVariation, on_delete=models.CASCADE, related_name='variant_product_images')
-    image = models.ImageField(upload_to='product-image-gallery')
+    image = models.ImageField(upload_to='product-image-gallery', blank=True, null=True)
 
     def __str__(self):
         return self.variant_product.variation_name
