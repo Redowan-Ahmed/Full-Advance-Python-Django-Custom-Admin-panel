@@ -1,6 +1,12 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import ShopProduct, ProductVariationsImageGallery, ProductVariation, ProductImageGallery
+from .models import ShopProduct, ProductVariationsImageGallery, ProductVariation, ProductImageGallery, ImageGallery
+
+
+class ImageGallerySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ImageGallery
+        fields = '__all__'
 
 
 class UserSerializer(serializers.ModelSerializer):

@@ -8,6 +8,7 @@ router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'products', views.ProductsViewset)
+router.register(r'images', views.ImageGalleryView)
 
 
 urlpatterns = [

@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.utils.html import format_html
-from .models import ShopProduct, ProductVariationsImageGallery, ProductVariation, ProductImageGallery
+from .models import ShopProduct, ProductVariationsImageGallery, ProductVariation, ProductImageGallery, ImageGallery
 
 # Register your models here.
 
@@ -72,7 +72,9 @@ class ProductVariationImageGalaryAdmin(admin.ModelAdmin):
     readonly_fields = ('thumbnail_preview',)
     
     def Thumbnail(self, obj):
-        return format_html(f'<img src="{obj.image.url}" width="50px" height="50px" alt="{obj.variant_product.variation_name}" />')
+        if obj.image:
+            return format_html(f'<img src="{obj.image.url}" width="50px" height="50px" />')
+        return format_html(f'<img src="No Image" width="50px" height="50px" />')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
@@ -126,7 +128,9 @@ class ProductVariationAdmin(admin.ModelAdmin):
     # this helps to define any files as readonly, which is not editable
 
     def Thumbnail(self, obj):
-        return format_html(f'<img src="{obj.thumbnail.url}" width="50px" height="50px" />')
+        if obj.thumbnail:
+            return format_html(f'<img src="{obj.thumbnail.url}" width="50px" height="50px" />')
+        return format_html(f'<img src="No Image" width="50px" height="50px" />')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
@@ -148,7 +152,9 @@ class ProductImageGalaryAdmin(admin.ModelAdmin):
     readonly_fields = ('thumbnail_preview',)
     
     def Thumbnail(self, obj):
-        return format_html(f'<img src="{obj.image.url}" width="50px" height="50px" alt="{obj.product.product_name}" />')
+        if obj.image:
+            return format_html(f'<img src="{obj.image.url}" width="50px" height="50px" />')
+        return format_html(f'<img src="No Image" width="50px" height="50px" />')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
@@ -156,3 +162,51 @@ class ProductImageGalaryAdmin(admin.ModelAdmin):
     # to show Preview the thumbnail image in the edit page
     
 admin.site.register(ProductImageGallery, ProductImageGalaryAdmin)
+
+
+
+class ImageGalleryAdmin(admin.ModelAdmin):
+    # product list page  customize
+
+    list_display = ('Thumbnail','author', 'created_at', 'updated_at')
+    
+    actions_on_bottom = True
+
+    list_display_links = ['Thumbnail', 'author']
+    actions_on_top = True
+    list_per_page = 20
+
+    list_filter = ['created_at', 'updated_at']
+
+    search_fields = ['author']
+
+    # product Edit page Customize
+
+    fields = ['author', 'image', 'Image_preview']
+
+    save_on_top = True
+    # this helps to show or remove save button section with functionality at top
+
+    save_as_continue = True
+    # this helps to show or remove save and continue editing button with functionality
+
+    save_as = True
+    # this helps to add a button with functionality to save the item as new instead of update the existing item in edit page.
+
+    readonly_fields = ('Image_preview',)
+    # this helps to define any files as readonly, which is not editable
+
+    def Thumbnail(self, obj):
+        if obj.image:
+            return format_html(f'<img src="{obj.image.url}" width="50px" height="50px" />')
+        return format_html(f'<img src="No Image" width="50px" height="50px" />')
+    # to show the thumbnail image in the list
+
+    def Image_preview(self, obj):
+        if obj.image:
+            return format_html(f'<img width="120px" src="{obj.image.url}" alt="No Image" >')
+        return format_html(f'<img src="No Image" width="50px" height="50px" />')
+    # to show Preview the thumbnail image in the edit page
+
+
+admin.site.register(ImageGallery, ImageGalleryAdmin)
