@@ -32,7 +32,7 @@ class ProductVariationSerializer(serializers.ModelSerializer):
 
 class ShopProductSerializer(serializers.ModelSerializer):
     variant_products = ProductVariationSerializer(many=True)
-    product_images = ProductImageGallerySerializer( many= True)
+    product_images = ProductImageGallerySerializer(many=True)
 
     class Meta:
         model = ShopProduct
@@ -44,9 +44,20 @@ class ShopProductSerializer(serializers.ModelSerializer):
         product = ShopProduct.objects.create(**validated_data)
         if not variant_products == []:
             for variant_product in variant_products:
-                ProductVariation.objects.create(product=product, variation_type = variant_product['variation_type'], variation_name = variant_product['variation_name'], short_description = variant_product['short_description'], sku = variant_product['sku'],regular_price = variant_product['regular_price'], discounted_price = variant_product['discounted_price'], schedule_discount = variant_product['schedule_discount'], stock = variant_product['stock'], out_of_stock = variant_product['out_of_stock'],  )
+
+                checkvarientimages = variant_product['variant_product_images']
+                print(checkvarientimages)
+
+                product_variant = ProductVariation.objects.create(product=product, variation_type = variant_product['variation_type'], variation_name = variant_product['variation_name'], short_description = variant_product['short_description'], sku = variant_product['sku'],regular_price = variant_product['regular_price'], discounted_price = variant_product['discounted_price'], schedule_discount = variant_product['schedule_discount'], stock = variant_product['stock'], out_of_stock = variant_product['out_of_stock'])
+
+                if not checkvarientimages == []:
+                    for varientimg in checkvarientimages:
+                        ProductVariationsImageGallery.objects.create(variant_product = product_variant, **varientimg)
+
         if not product_images == []:
             for product_image in product_images:
-                ProductImageGallery.objects.create(product = product, image = product_image['image'])
+                ProductImageGallery.objects.create(
+                    product=product, image=product_image['image'])
+
 
         return product

@@ -70,7 +70,7 @@ class ProductVariation(BaseModel):
 
 class ProductImageGallery(BaseModel):
     product = models.ForeignKey(
-        ShopProduct, on_delete=models.CASCADE, related_name='product_images')
+        ShopProduct, on_delete=models.CASCADE, related_name='product_images', blank=True)
     image = models.ImageField(upload_to='product-image-gallery', blank=True, null=True)
 
     def __str__(self):
@@ -79,7 +79,7 @@ class ProductImageGallery(BaseModel):
 
 class ProductVariationsImageGallery(BaseModel):
     variant_product = models.ForeignKey(
-        ProductVariation, on_delete=models.CASCADE, related_name='variant_product_images')
+        ProductVariation, on_delete=models.CASCADE, related_name='variant_product_images', blank=True)
     image = models.ImageField(upload_to='product-image-gallery', blank=True, null=True)
 
     def __str__(self):
