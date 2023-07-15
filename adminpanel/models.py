@@ -25,9 +25,9 @@ class ShopProduct(BaseModel):
     sku = models.CharField(max_length=200, blank=True, null=True, unique=True)
     slug = models.SlugField(max_length=350, blank=True,
                             unique=True, db_index=True)
-    regular_price = models.DecimalField(max_digits=1000, decimal_places=2)
+    regular_price = models.DecimalField(max_digits=60, decimal_places=2)
     discounted_price = models.DecimalField(
-        max_digits=1000, decimal_places=2, blank=True, null=True)
+        max_digits=60, decimal_places=2, blank=True, null=True)
     schedule_discount = models.DateTimeField(blank=True, null=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='author')
@@ -63,9 +63,9 @@ class ProductVariation(BaseModel):
     sku = models.CharField(max_length=200, blank=True, null=True, unique=True)
     thumbnail = models.ImageField(
         upload_to='product-images', blank=True, null=True)
-    regular_price = models.DecimalField(max_digits=1000, decimal_places=2)
+    regular_price = models.DecimalField(max_digits=60, decimal_places=2)
     discounted_price = models.DecimalField(
-        max_digits=1000, decimal_places=2, blank=True, null=True)
+        max_digits=60, decimal_places=2, blank=True, null=True)
     schedule_discount = models.DateTimeField(blank=True, null=True)
     stock = models.IntegerField(default=10)
     out_of_stock = models.BooleanField(default=False)

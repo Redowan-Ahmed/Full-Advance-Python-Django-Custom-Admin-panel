@@ -50,7 +50,7 @@ class ShopProductAdmin(admin.ModelAdmin):
     def Thumbnail(self, obj):
         if obj.thumbnail:
             return format_html(f'<img src="{obj.thumbnail.url}" width="50px" height="50px" />')
-        return format_html(f'<img src="No Image" width="50px" height="50px" />')
+        return format_html(f'<div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center;width:50px;font-size:10px;height:50px;background:red;color: white;border-radius: 3px;"> No File </div>')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
@@ -76,7 +76,7 @@ class ProductVariationImageGalaryAdmin(admin.ModelAdmin):
     def Thumbnail(self, obj):
         if obj.image:
             return format_html(f'<img src="{obj.image.url}" width="50px" height="50px" />')
-        return format_html(f'<img src="No Image" width="50px" height="50px" />')
+        return format_html(f'<div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center;width:50px;font-size:10px;height:50px;background:red;color: white;border-radius: 3px;"> No File </div>')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
@@ -136,7 +136,7 @@ class ProductVariationAdmin(admin.ModelAdmin):
     def Thumbnail(self, obj):
         if obj.thumbnail:
             return format_html(f'<img src="{obj.thumbnail.url}" width="50px" height="50px" />')
-        return format_html(f'<img src="No Image" width="50px" height="50px" />')
+        return format_html(f'<div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center;width:50px;font-size:10px;height:50px;background:red;color: white;border-radius: 3px;"> No Image </div>')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
@@ -161,7 +161,7 @@ class ProductImageGalaryAdmin(admin.ModelAdmin):
     def Thumbnail(self, obj):
         if obj.image:
             return format_html(f'<img src="{obj.image.url}" width="50px" height="50px" />')
-        return format_html(f'<img src="No Image" width="50px" height="50px" />')
+        return format_html(f'<div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center;width:50px;font-size:10px;height:50px;background:red;color: white;border-radius: 3px;"> No Image </div>')
     # to show the thumbnail image in the list
 
     def thumbnail_preview(self, obj):
@@ -206,7 +206,7 @@ class MediaGalleryAdmin(admin.ModelAdmin):
     def PreviewFile(self, obj):
         if obj.media:
             format = str(obj.media.url).split('.')[-1]
-            if format.lower() == 'png' or format == 'jpg' or format == 'gif' or format == 'webp':
+            if format.lower() == 'png' or format.lower() == 'jpg' or format.lower() == 'gif' or format.lower() == 'webp':
                 return format_html(f'<img style="border-radius: 3px;" src="{obj.media.url}" width="50px" height="50px" />')
             else:
                 return format_html(f'<div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center;width:50px;font-size:10px;height:50px;background:green;color: white;border-radius: 3px;"> {format.upper()} File </div>')
@@ -216,7 +216,7 @@ class MediaGalleryAdmin(admin.ModelAdmin):
     def PreviewBaseFile(self, obj):
         if obj.media:
             format = str(obj.media.url).split('.')[-1]
-            if format == 'png' or format == 'jpg' or format == 'gif' or format == 'webp':
+            if format.lower() == 'png' or format.lower() == 'jpg' or format.lower() == 'gif' or format.lower() == 'webp':
                 return format_html(f'<a href="{obj.media.url}" target="_blank"><img style="border-radius: 3px;" src="{obj.media.url}" width="150px" height="150px" /></a>')
             else:
                 return format_html(f'<a href="{obj.media.url}"><div style="display:flex;flex-wrap:wrap;align-content:center;justify-content:center;align-items:center;width:150px;font-size:14px;height:150px;background:green;color: white;border-radius: 3px;"> {format.upper()} File </div></a>')

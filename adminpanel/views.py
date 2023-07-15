@@ -4,6 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import ShopProduct, MediaGallery
 from .serializers import ShopProductSerializer, MediaGallerySerializer, OpProductSerializer
+from .mixxins import BlogMixxing
 
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.parsers import MultiPartParser, FormParser
@@ -15,8 +16,8 @@ def index(request):
     return HttpResponseRedirect('/api/')
 
 
-class ProductsViewset(viewsets.ModelViewSet):
-    #parser_classes = (MultiPartParser, FormParser)
+class ProductsViewset(viewsets.ModelViewSet, BlogMixxing):
+    # parser_classes = (MultiPartParser, FormParser)
     permission_classes = [IsAuthenticatedOrReadOnly]
     lookup_field = 'slug'
     queryset = (
@@ -26,14 +27,6 @@ class ProductsViewset(viewsets.ModelViewSet):
     )
     serializer_class = ShopProductSerializer
 
-    @action(detail=False, methods=['get', 'post'])
-    def OnlyProudcts(self, *args, **kwargs):
-        products = ShopProduct.objects.all()
-        serializer = OpProductSerializer(products, many= True)
-        return Response({
-            'data': serializer.data,
-        })
-
 
 
 class MediaGalleryView(viewsets.ModelViewSet):
@@ -42,4 +35,3 @@ class MediaGalleryView(viewsets.ModelViewSet):
     serializer_class = MediaGallerySerializer
     parser_classes = (MultiPartParser, FormParser)
     permission_classes = [IsAuthenticatedOrReadOnly]
-
