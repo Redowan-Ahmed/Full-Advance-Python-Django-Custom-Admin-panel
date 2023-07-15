@@ -42,7 +42,7 @@ class ShopProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ShopProduct
-        fields = ['id','slug','product_name','sku','regular_price','discounted_price','schedule_discount','stock','out_of_stock','thumbnail','product_images','short_description','description','have_variant','variant_products',]
+        fields = ['id','slug','product_name','sku','regular_price','discounted_price','schedule_discount','stock','out_of_stock','author','thumbnail','product_images','short_description','description','have_variant','variant_products']
         
 
     def create(self, validated_data):

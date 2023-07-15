@@ -101,6 +101,15 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 20
 }
 
+#CACHES = {
+#    'default': {
+#        'BACKEND': 'django_redis.cache.RedisCache',
+#        'LOCATION': 'redis://127.0.0.1:637/',
+#        'OPTIONS': {
+#           'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#        }
+#    }
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/

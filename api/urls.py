@@ -2,6 +2,7 @@ from django.urls import include, path
 from rest_framework import routers
 from .defaultviews import GroupViewSet, UserViewSet
 from adminpanel import views
+from blog.views import BlogPosts, BlogCategory
 from aliscrape.views import get_product_data
 
 router = routers.DefaultRouter()
@@ -9,6 +10,8 @@ router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
 router.register(r'products', views.ProductsViewset)
 router.register(r'media-files', views.MediaGalleryView, basename='media')
+router.register(r'blogs', BlogPosts, basename='post')
+router.register(r'blog-categories', BlogCategory, basename='blog-category')
 
 
 urlpatterns = [
