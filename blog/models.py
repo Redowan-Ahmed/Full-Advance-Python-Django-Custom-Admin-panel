@@ -19,9 +19,6 @@ class Category(BaseModel):
     parent = models.ForeignKey('self', on_delete=models.CASCADE,
                                related_name="parent_category", blank=True, null=True)
     slug = models.SlugField(max_length=200, unique=True, blank=True)
-    
-    class Meta:
-        ordering = ['name']
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -53,7 +50,7 @@ class Post(BaseModel):
     thumbnail = models.ImageField(
         upload_to='blog-images', blank=True, null=True)
     category = models.ForeignKey(
-        Category, on_delete=models.SET_DEFAULT, default='Uncategorized', related_name='category')
+        Category, on_delete=models.SET_DEFAULT, default='19e72906-51a2-4998-a0a1-aca503284bbd', related_name='category')
     tags = models.ManyToManyField(Tag, related_name='tags', blank=True)
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, default=1)
@@ -77,3 +74,18 @@ class Post(BaseModel):
                 self.slug = sluged
 
         super(Post, self).save(*args, **kwargs)
+
+
+class Comment(BaseModel):
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='post', blank=True, null=True)
+    commenter = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True, related_name='commenter')
+    comment = models.TextField(max_length=500)
+    liked = models.IntegerField(blank=True, default=0)
+    disliked = models.IntegerField(blank=True, default=0)
+    replied = models.ForeignKey('self', on_delete=models.CASCADE,
+                                blank=True, null=True, related_name='replied_comment')
+
+    def __str__(self):
+        return str( self.commenter.username +' ' + self.comment +' ' + self.post.title )
