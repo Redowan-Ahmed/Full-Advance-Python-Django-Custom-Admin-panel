@@ -27,23 +27,20 @@ class PostSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         category = validated_data.pop('category')
         tags = validated_data.pop('tags')
-        post = Post.objects.create(**validated_data)
+
         cate = Category.objects.filter(name=category['name'])
         if cate:
-            cat = cate[0]
-            post.category.add(*cat)
+            newcat = cate[0]
         else:
             newcat = Category.objects.create(name=category['name'])
-            post.category.add(*newcat)
-            print(newcat)
 
         for tag in tags:
             if Tag.objects.filter(name=tag['name']):
-                print(tag)
-                return post.tags.add(*tag)
+                newtag = tag
             else:
                 newtag = Tag.objects.create(name=tag['name'])
 
+        post = Post.objects.create(category = newcat , **validated_data)
         return post
 
 
