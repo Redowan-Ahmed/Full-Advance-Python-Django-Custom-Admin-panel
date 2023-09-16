@@ -4,6 +4,15 @@ from .models import ShopProduct, ProductVariationsImageGallery, ProductVariation
 
 # Register your models here.
 
+@admin.action(description="Activate selected tickets")
+def activate_tickets(modeladmin, request, queryset):
+    queryset.update(out_of_stock=True)
+
+
+@admin.action(description="Deactivate selected tickets")
+def deactivate_tickets(modeladmin, request, queryset):
+    queryset.update(out_of_stock=False)
+
 
 class ShopProductAdmin(admin.ModelAdmin):
     # product list page  customize
@@ -17,6 +26,7 @@ class ShopProductAdmin(admin.ModelAdmin):
     # By this tuple if you add multiple objects the clickable link will be add on all the listed objects
     actions_on_top = True
     # By this True value here django admin panel will show action form at the top. if the value is False the action form will be not displayed at top.
+    actions = [activate_tickets, deactivate_tickets]
     list_per_page = 10
     # By adding any numeric value here depending on the value the admin panel will show products or objects in a page and rest of them will show in the next page and at the bottom it will show a pagination .
     list_editable = ['regular_price',
